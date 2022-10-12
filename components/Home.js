@@ -1,14 +1,20 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, BackHandler } from 'react-native';
 import * as React from 'react'
 
-const Home = ({navigation})=>{
+const Home = ({navigation, route})=>{
+    const backAction =()=>{
+        return true
+    }
+    const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    const {name_param,pass_param}=route.params
+    console.log(route.params)
     return (
-        <Button onPress={()=>{
-            navigation.navigate('Login',{name: name})
-        }}
-        >
-            Go to login
-        </Button>
+        <Text>
+            This is {JSON.stringify(name_param)} with password: {JSON.stringify(pass_param)}
+        </Text>
     )
 
 }
